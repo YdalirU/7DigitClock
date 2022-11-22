@@ -8,8 +8,8 @@
 
 
 //WLAN Struktur
-const char* ssid ="Bratzelwurst";
-const char* pwd = "Nz2K5Ydpr7oNH7x";
+//const char* ssid ="Bratzelwurst";
+//const char* pwd = "Nz2K5Ydpr7oNH7x";
 const char* ntp = "ptbtime1.ptb.de";
 // Replace with your network credentials
 String StrSSID = "";
@@ -21,7 +21,7 @@ String StrPWD = "";
 #define LED_SEC 5 //Sekunden-Anzeige ehem. 33 verschoben wegen TouchPin
 //#define delTime 3000 // Künstliche PWM für Loop
 
-// H10=26, H1=18, M10=19, M1=23 : Ports der 7Segmenter per Fritzing 
+// H10=26, H1=18, M10=19, M1=23 : GPIO Ports der 7Segmenter per Fritzing 
 //7Segment Ansteuerung Struktur
 #define LED_H10 26  //Akivierung eines 7Segmentblocks Stunden 10er
 #define LED_H1 18   //Aktivierung des 7Segment-Blocks Stunden 1er
@@ -38,7 +38,8 @@ String StrPWD = "";
 #define LED_7_G 21 //Pad zu Seg G ebenso I2C0:SDA, Esatzweise IO39 (Also unused ADC3)
 #define LED_RH 12 //PAD zu Anzeige der aktiven T/Rh Anzeige
 
-// PWM Kanal, Dimmer Struktur, jeder PWM Kanal steuert ein Segment
+/* PWM Kanal, Dimmer Struktur, jeder PWM Kanal steuert ein Segment,
+which is later connected to a GPIO*/
 #define LEDC_CH_0 0 // PWM Kanal 0, 0 von 15 : Port H10
 #define LEDC_CH_1 1 // PWM Kanae 1, 1 von 15 : Port H1
 #define LEDC_CH_2 2 // PWM Kanal 2, 2 von 15 : Port M10
@@ -54,10 +55,18 @@ DHTesp dht;
 TempAndHumidity dhtData;
 
 // Auflösung der PWM Pulsbreiten-Quantisierung
+
 #define LEDC_RES 12 
 // Der ADC liefert 12 Bit Tiefe, vllt. ist das zu viel
 #define LEDC_FRQ 2000 //Repetition Rate der Pulsfolge
-
+/*See
+  LEDC_CH_N defines the PWM Channel
+  LEDC_RES defines the resolution to 12 bit
+  LEDC_FRQ ist the Freqnuency whoch is output through tha channel
+  LED_H10 is an example and in this case defines GPIO26
+  ledcSetup(LEDC_CH_0, LEDC_FRQ, LEDC_RES);    
+  ledcAttachPin(LED_H10, LEDC_CH_0);
+*/
 
 
 //Zeitmessung
