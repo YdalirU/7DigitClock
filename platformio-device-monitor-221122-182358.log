@@ -1,0 +1,2175 @@
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+flash read err, 1000
+ets_main.c 371 
+ets Jun  8 2016 00:22:57
+
+rst:0x10 (RTCWDT_RTC_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+Connecting to Bratzelwurst
+.
+WiFi connected.
+Tuesday, November 22 2022 18:24:59
+Time was read from PTB...
+WiFi disconnected.
+Testlauf
+Setup fertig...
+Reading THR running on core 0
+21625 µs
+Touch Value LUM 0
+Luminescence : 700
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21772 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21908 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22184 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21679 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21679 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21772 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21772 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21767 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21956 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21819 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22460 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21861 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21865 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21860 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22421 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21861 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21861 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21860 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21861 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21816 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21819 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21982 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21747 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21769 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21816 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21898 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21928 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21816 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21721 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22023 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21775 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21730 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21724 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21732 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21724 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21687 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21730 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21728 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21819 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21731 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21730 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21679 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21768 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21679 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22431 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21723 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22466 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21729 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21929 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21722 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21839 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21721 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21818 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21679 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22438 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21818 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21676 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+22456 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21819 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21815 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21727 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21813 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21844 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21818 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21674 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21721 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21814 µs
+Reading Time running on core 0
+Reading THR running on core 0
+21675 µs
+Reading Time running on core 0
