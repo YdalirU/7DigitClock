@@ -89,6 +89,7 @@ unsigned int uiTouch14 = 0;
 unsigned int uiTouch33 = 0;
 unsigned int uiLum = 600; // Speicher für aktuelle Helligkeit
 bool  bLumDir = true; //Wirkrichtung abwärts FALSE oder aufwärts TRUE
+bool bFirstLoop = false;
 
 //Definition der Segment-Ports für Test-Durchlauf
 int iarSegs[7] = {LED_7_A,LED_7_B,LED_7_C,LED_7_D,LED_7_E,LED_7_F, LED_7_G};
@@ -100,15 +101,17 @@ int iarSegs[7] = {LED_7_A,LED_7_B,LED_7_C,LED_7_D,LED_7_E,LED_7_F, LED_7_G};
 * Das geht, ist aber programtechnisch aufwendiger, muss ich erst mal lernen 
 */
 int iarNum2Segs[10][7]={{1,1,1,1,1,1,0},{0,1,1,0,0,0,0},{1,1,0,1,1,0,1},{1,1,1,1,0,0,1},{0,1,1,0,0,1,1},{1,0,1,1,0,1,1},{1,0,1,1,1,1,1},{1,1,1,0,0,0,0},{1,1,1,1,1,1,1},{1,1,1,1,0,1,1}};
-int i = 0;
 int iChClk = 0; //Counter für die Position der Stelle/Digit
 uint uiClk[4]={2,4,5,9}; // Speicher f.d. 4 Digits
 //speicher für T/Rh
 int iHrTmp = 0;
 int iMinRH = 0;
-bool bShowRH = false;
-bool bShowTM = false;
-
+/* The following bRead booleans control asynchronous read/write access 
+to the display array by the timer interrupt and the Time and RH data buffer 
+by the CORE0 process Officially this should prevent access by both functions
+at the same tme to the same variables */
+bool bReadTM = false;
+bool bReadRH = false;
 //Zeit-Strukur-Speicher
 struct tm timeinfo;
 
@@ -136,13 +139,12 @@ void printLocalTime(){
 void ReadTHR(void * pvParameter){
   unsigned long C0Time = 0;
   
-
   for(;;){
     //if((millis() - C0Time)>5000){
     //C0Time = millis();
-      // DT11 T/RH daten holen
+      // DT11 T/RH read data
       // Reading temperature or humidity takes about 22 milliseconds!
-      if (bShowRH){
+      if (bReadRH && !bReadTM){
         Serial.print("Reading THR running on core ");
         Serial.println(xPortGetCoreID());
         ulStart = micros();    
@@ -152,23 +154,21 @@ void ReadTHR(void * pvParameter){
         ulStop = micros() - ulStart;
         Serial.print(ulStop);
         Serial.println(" µs");
-        bShowRH = false;
-        //delay(5);
+        bReadRH = false;
       }
-      //else{
-      if(bShowTM){
+      if(bReadTM && !bReadRH){
         Serial.print("Reading Time running on core ");
         Serial.println(xPortGetCoreID());
+        
         if(!getLocalTime(&timeinfo)){
           Serial.println("Failed to obtain time");
-          while(true){ } //End While
-        } //Loop forever ohne funktion
-        bShowTM = false;
-         //bShowRH = true;
-         //delay(5);
+          while(true){ }//Loop forever with no function when time could not be loaded
+        }
+        
+        bReadTM = false;
       }
     //}
-    delay(5);
+    delay(5); //Break down the loop to give other processes on core0 time
   } 
 }
 
@@ -181,11 +181,18 @@ int iTick = 0;
 
 // IRQ Routine mit kritische Sektion, kann nicht unterbrochen werden
 void IRAM_ATTR onTime() {
-  portENTER_CRITICAL_ISR(&timerMux); 
-  digitalWrite(LED_SEC,not(digitalRead(LED_SEC)));
-  //Serial.println(analogRead(ADC_PIN));
+  portENTER_CRITICAL_ISR(&timerMux);
+  
+  if (iTick<7){
+    digitalWrite(LED_SEC,not(digitalRead(LED_SEC)));
+  }
+  else{  
+    digitalWrite(LED_SEC,HIGH);
+  }
+  
   switch(iTick){
     case 0:
+      
       //GetTime, wenn 0 <= iTick < 6 wird die Zeit angezeigt 
       //Serial.println("Going to read Time");
       digitalWrite(LED_RH, LOW);
@@ -195,41 +202,35 @@ void IRAM_ATTR onTime() {
         while(true){ } //End While
       } //Loop forever ohne funktion
       */
-      if (!bShowTM){ 
-        //Semaphore verbietet Zugriff während CORE0 Porzess die Daten lädt
+      if (!bReadTM){ 
+        //Semaphore denies access to data as long as CORE0 Process accesses variables
         uiClk[0] = timeinfo.tm_hour / 10;
         uiClk[1] = timeinfo.tm_hour % 10;   
         uiClk[2] = timeinfo.tm_min / 10;  
         uiClk[3] = timeinfo.tm_min % 10;
-        bShowRH = true;
+        bReadRH = true; //While showing time Rh can be read
       }
-      //if (!bShowTM) {bShowRH = true;}
     break;
   
-    /*case 5:
-      //Allow reading data from DHT11      
-      bShowRH = true;      
-    break;        //iTick ist = 6 (6 Sekunden vergangen), die Anzeige schaltet T/RH auf bis iTick = 9 = 4 Sekunden Anzeigedauer  
-    */
-    case 6:
-      digitalWrite(LED_RH, HIGH);
-      //Schreibt T/Rh Daten in den Anzeige-Array
-      if(!bShowRH){
-        //Semaphore verbietet Datenzugriff während CORE0 Prozess schreibt
+    case 7:
+      digitalWrite(LED_RH, HIGH); 
+      
+      //Write T/Rh Data into Diplay-Array
+      if(!bReadRH){
+        //Semaphore denies data access as long as CORE0 Process has accesss
         uiClk[0] = iHrTmp / 10;  
         uiClk[1] = iHrTmp % 10;
         uiClk[2] = iMinRH / 10;
         uiClk[3] = iMinRH % 10;
-        bShowTM = true;
+        bReadTM = true; //While showing RH Time can be updated
       }
-      //if (!bShowRH) {bShowTM = true;}   
     break;
     default:     
     break;
   } //End Switch
   
-  //iTick wird nach 10 Sekunden auf 0 gesetzt und die Zeitanzeige wieder eingeschaltet     
-  if (iTick<9){iTick++;}else{iTick=0;}
+  //iTick is reset after 10 seconds to 0 
+  if (iTick<=9){iTick++;}else{iTick=0;}
   
   portEXIT_CRITICAL_ISR(&timerMux);
 }  //ENd if Timer IRQ Routine
@@ -238,12 +239,20 @@ TaskHandle_t Task1;
 
 void GetTime(){
   // Connect to Wi-Fi für Zeit Server
-
+  // Initialize SPIFFS
+  if(!SPIFFS.begin(true)){
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    while(true){}
+  }else
+  {
+    Serial.println("SPIFFS mounted");
+  }
   File file = SPIFFS.open("/wifi.txt");
   StrSSID = file.readStringUntil('\n');
   StrPWD = file.readStringUntil('\n');
   Serial.printf("FromSPIFFS: %s, %s \n",StrSSID.c_str(), StrPWD.c_str());
   file.close();
+  SPIFFS.end();
 
   WiFi.begin(StrSSID.c_str(), StrPWD.c_str());
   Serial.print("Connecting to WiFi..");
@@ -269,7 +278,7 @@ void GetTime(){
 *************************************/
 
 void setup(){
- 
+ int i;
   Serial.begin(115200);
   //Starte DHT zugriff
   //dht.begin();
@@ -305,29 +314,6 @@ void setup(){
   pinMode (LED_7_F, OUTPUT);
   pinMode (LED_7_G, OUTPUT);
   
-//Konfiguriere die Uhrzeit
-GetTime();  
-/* Connect to Wi-Fi für Zeit Server
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, pwd);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("");
-  Serial.println("WiFi connected.");    
-
-//GetTime from Server
-
-  configTime(gmtOffs_Sec, DayLightSavingTime_Sec, ntp);
-  printLocalTime();
- */ 
-  //Set Time to Display Buffer
-  uiClk[0] = timeinfo.tm_hour / 10;
-  uiClk[1] = timeinfo.tm_hour % 10;   
-  uiClk[2] = timeinfo.tm_min / 10;  
-  uiClk[3] = timeinfo.tm_min % 10;  
  /*
  Serial.println("Time was read from PTB ad set...");  
 //disconnect WiFi as it's no longer needed
@@ -373,14 +359,20 @@ GetTime();
     digitalWrite(LED_CTL, LOW); //Kontroll-LED aus
     delay(200); //Warte 300 ms       
   }  
-//Abschliessend in Vorbereitung der Kontrolle   
-// über das angesteuerte Digit
-  iChClk = 3; //Der Anzeigezähler wird auf den höchsten Wert gesetzt und in LOOP dann als "zu löschen" behandelt
-
 //Setze Sekunden ticker
   ulTime = millis();
   ulLstTime = millis();
-      
+
+//Konfiguriere die Uhrzeit
+  GetTime();  
+  //Set Time to Display Buffer
+  uiClk[0] = timeinfo.tm_hour / 10;
+  uiClk[1] = timeinfo.tm_hour % 10;   
+  uiClk[2] = timeinfo.tm_min / 10;  
+  uiClk[3] = timeinfo.tm_min % 10;  
+//Abschliessend in Vorbereitung der Kontrolle   
+// über das angesteuerte Digit
+  iChClk = 3; //Der Digit-Zeiger wird auf den höchsten Wert gesetzt und in LOOP dann zu "0" gesetzt
 
 // Configure the Prescaler at 80 the quarter of the ESP32 is cadence at 80Mhz
   iTick = 0;
@@ -410,6 +402,10 @@ GetTime();
 */
 
 void loop() {
+  if(!bFirstLoop){
+      bFirstLoop=true;
+      Serial.println("Erster Eintritt in Loop()");
+  }
   //Touch sensor lesen, auswerten und ggf Sommerzeit setzen 
   ulTime = millis();
   if((ulTime-ulLstTime) > 100){    //alle 100 ms den TouchSensor abfragen
@@ -424,7 +420,7 @@ void loop() {
       SerialBT.printf("TouchPin Saving Daylight reads %i\n",touchRead(TPIN14));  
     }
     if (touchRead(TPIN14) < 35 ){
-      //Alle100ms wird uiTouch + 1 gezählt
+      //Alle100ms wird uiTouch14 + 1 gezählt
       //nach 3 Durchläufen (TouchRead(TPIN) < 35) = 300ms wird die Routine aktiv
       uiTouch14++;
       if (uiTouch14 > 3){
@@ -446,8 +442,8 @@ void loop() {
 
     //uiTouch33 : Helligkeit
      if (touchRead(TPIN33) < 35 ){
-      //Alle100ms wird uiTouch + 1 gezählt
-      //nach 5 Durchläufen (TouchRead(TPIN) < 15) = 500ms wird die Routine aktiv
+      //Alle100ms wird uiTouch33 + 1 gezählt
+      //nach 5 Durchläufen (TouchRead(TPIN) < 35) = 500ms wird die Routine aktiv
       uiTouch33++;
       if (uiTouch33 > 3){
         uiTouch33 = 0;
@@ -477,29 +473,7 @@ void loop() {
   }
 
   
-//Erst mal letzte aktive Anzeige ausschalten / löschen, jetzt sind alle Anzeigen aus
-  ledcWrite(iChClk,0); // Setz die Pulsweite für Digit i auf 0, das Digit i ist wieder aus.
-  //delay(1);
-//iChClk behandeln: wenn >=3 oder <0 dann iChClk=0 (>=3 zur Sicherheit) sonst iChClk++
-  switch(iChClk){
-    case 0 ... 2:
-      iChClk++; // iChClk kann bis 3 hochzählen
-    break;
-    default:
-      iChClk=0; //Wenn > 2 im nächsten Durchlauf (=3) dann wird es zurückgesetzt auf 0
-  } //End switch iChCLk
-  //Serial.print("iChClk: ");
-  //Serial.println(iChClk);
-//Wert der aktuellen Stelle in der Uhrzeit passend gemäß iChClk abrufen
-
-// die 7 Segment Ports gemäß aktuellem Wert setzen
-  for(i=0;i<7;++i){
-    digitalWrite(iarSegs[i],iarNum2Segs[uiClk[iChClk]][i]);
-  }
-
-//Das Digit einschalten bzw auf den Leuchtwert gemäß Dimmer setzen
- // ledcWrite(iChClk,lesenADC()); // Helligkeit wird entsprechend des analogen Spannnungswertes am ADC0 Eingang gesetzt
-   ledcWrite(iChClk,uiLum); // Helligkeit wird entsprechend der Variable uiLUM gesetzt
+  
   /*
   * Das nachfolgende Delay ist experimentell eingestellt worden
   * und sorgt für ein Gleichgewicht von ausreichend schnellem Scan der Digits (Einzelne Anzeige-Blöcke)
@@ -516,7 +490,8 @@ void loop() {
   * (Quelle: https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf)
   */ 
  /*
-  if (bShowRH){
+ //This was the original INLOOP RH reading process whoch caused the display to freeze
+  if (bShowRH){ no bShowRH is bReadRH
     // DT11 T/RH daten holen
     // Reading temperature or humidity takes about 22 milliseconds!
     ulStart = micros();    
@@ -533,3 +508,31 @@ void loop() {
   
       
 }//End LOOP
+
+void UpdateDisplay(){
+int i;
+//Erst mal letzte aktive Anzeige ausschalten / löschen, jetzt sind alle Anzeigen aus
+  ledcWrite(iChClk,0); // Setz die Pulsweite für Digit i auf 0, das Digit i ist wieder aus.
+  
+  /*iChClk behandeln: wenn >=3 oder <0 dann iChClk=0 (>=3 zur Sicherheit) sonst iChClk++
+  switch(iChClk){
+    case 0 ... 2:
+      iChClk++; // iChClk kann bis 3 hochzählen
+    break;
+    default:
+      iChClk=0; //Wenn > 2 im nächsten Durchlauf (=3) dann wird es zurückgesetzt auf 0
+   } End switch iChCLk */
+   if(iChClk<3){iChClk++;}else{iChClk=0;}
+
+    //Wert der aktuellen Stelle in der Uhrzeit passend gemäß iChClk abrufen
+
+    // die 7 Segment Ports gemäß aktuellem Wert setzen
+    for(i=0;i<7;++i){
+      digitalWrite(iarSegs[i],iarNum2Segs[uiClk[iChClk]][i]);
+    }
+
+    //Das Digit einschalten bzw auf den Leuchtwert gemäß Dimmer setzen
+    // ledcWrite(iChClk,lesenADC()); // Helligkeit wird entsprechend des analogen Spannnungswertes am ADC0 Eingang gesetzt
+    ledcWrite(iChClk,uiLum); // Brightness is set to value of uiLUM
+
+}

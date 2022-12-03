@@ -4,3 +4,4 @@
 .vscode/launch.json
 .vscode/ipch
 data/wifi.txt
+platformio-device-monitor*
