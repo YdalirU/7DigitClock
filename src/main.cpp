@@ -2,16 +2,31 @@
 #include "time.h"
 #include "WiFi.h"
 #include "DHTesp.h"
-#include "BluetoothSerial.h"
 #include <SPIFFS.h>
 //#include "rtc.h"
 void UpdateDisplay();
 void DisplayTest();
 void TouchControl();
 
+/* Pinout WEMOS D1 mini
+               ---------- [USB] ---------------- 
+        [IO06] xx IO00 (SD0)           (SD3)  IO10 xx IO11 (CMD)
+        [IO08] x? IO15 (TD0) RTC? (TCK) RTC?  IO13 ?x IO09 (SD2)
+  LEDTCK  IO02 0o VCC                          3V3 ox NC 
+  RTC?    IO00 ?o GND                 LEDSEC  IO05 00 IO14 TOUCH6(TMS)
+  DHT     IO04 00 IO16 LED_7C         LED_M1  IO23 0x IO34 (IN)
+  RTC     IO12 00 IO17 LED_7D         LED_M10 IO19 00 IO33 TOUCH8 
+  LED_7E  IO32 00 IO21 LED_7G         LED_H1  IO18 0x IO35 (IN)
+  LED_7F  IO25 00 IO22 LED_7A         LED_H10 IO26 0x IO39 (IN) (SVN)
+  LED_7B  IO27 0o IO03 (RXD)        (SVP)(IN) IO36 xx NC
+           GND oo IO01 (TX)                    RST xo GND
+ Use LED_RH also as LEDSEC free IO05 or IO12
+ RTC 3 Wire POSSIBLE GPIO Also IO05 or IO12
+ CLK OUT    IO00    
+ DAT I/O    IO13
+ RST OUT    IO15
+*/
 // WLAN Struktur
-// const char* ssid ="Bratzelwurst";
-// const char* pwd = "Nz2K5Ydpr7oNH7x";
 const char *ntp = "ptbtime1.ptb.de";
 // Replace with your network credentials
 String StrSSID = "";
@@ -21,6 +36,7 @@ String StrPWD = "";
 //#define ADC_PIN 34 //ADC2-7 an GPIO 14
 #define LED_CTL 2 // Ticker LED
 #define LED_SEC 5 // Sekunden-Anzeige ehem. 33 verschoben wegen TouchPin
+//#define LED_RH 12  // PAD zu Anzeige der aktiven T/Rh Anzeige
 //#define delTime 3000 // Künstliche PWM für Loop
 
 // H10=26, H1=18, M10=19, M1=23 : GPIO Ports der 7Segmenter per Fritzing
@@ -38,7 +54,7 @@ String StrPWD = "";
 #define LED_7_E 32 // Pad zu Seg E
 #define LED_7_F 25 // Pad zu Seg F
 #define LED_7_G 21 // Pad zu Seg G ebenso I2C0:SDA, Esatzweise IO39 (Also unused ADC3)
-#define LED_RH 12  // PAD zu Anzeige der aktiven T/Rh Anzeige
+
 
 /* PWM Kanal, Dimmer Struktur, jeder PWM Kanal steuert ein Segment,
 which is later connected to a GPIO*/
@@ -81,7 +97,6 @@ unsigned long ulStop;
 const long gmtOffs_Sec = 3600;           //  Deutschland ist 1h plus
 unsigned int DayLightSavingTime_Sec = 0; // Sommerzeit 1h = 3600 sec, wenn keine Sommerzeit dann 0
 // Touch Sens
-BluetoothSerial SerialBT; // Instanz BT Object
 // DayLight Saving Time
 unsigned int uiTouch14 = 0;
 #define TOUCH14 T6 // Touch Channel 6
@@ -118,17 +133,6 @@ bool bReadRH = false;
 // Zeit-Strukur-Speicher
 struct tm timeinfo;
 
-/*Um die Helligekeit der LEDs beeinflussen zu können
-int lesenADC(){
- int anaRead = analogRead(ADC_PIN);
- //Serial.println("Aktueller Wert : " + String(anaRead));
- if (anaRead < 200){
-   return 200;
- } else {
-   return anaRead;
- }
-}*/
-
 void printLocalTime()
 {
   struct tm timeinfo;
@@ -147,19 +151,17 @@ void ReadTHR(void *pvParameter)
 
   for (;;)
   {
-    // if((millis() - C0Time)>5000){
-    // C0Time = millis();
     //  DT11 T/RH read data
     //  Reading temperature or humidity takes about 22 milliseconds!
     if (bReadRH && !bReadTM)
     {
       Serial.print("Reading THR running on core ");
       Serial.println(xPortGetCoreID());
-      //  ulStart = micros();
+      //ulStart = micros();
       dhtData = dht.getTempAndHumidity();
       iHrTmp = int(dhtData.temperature);
       iMinRH = int(dhtData.humidity);
-      /*  ulStop = micros() - ulStart;
+      /*ulStop = micros() - ulStart;
         Serial.print(ulStop);
         Serial.println(" µs");
       */
@@ -211,14 +213,7 @@ void IRAM_ATTR onTime()
   case 0:
 
     // GetTime, wenn 0 <= iTick < 6 wird die Zeit angezeigt
-    // Serial.println("Going to read Time");
-    digitalWrite(LED_RH, LOW);
-    /*
-    if(!getLocalTime(&timeinfo)){
-      Serial.println("Failed to obtain time");
-      while(true){ } //End While
-    } //Loop forever ohne funktion
-    */
+    
     if (!bReadTM)
     {
       // Semaphore denies access to data as long as CORE0 Process accesses variables
@@ -231,8 +226,6 @@ void IRAM_ATTR onTime()
     break;
 
   case 7:
-    digitalWrite(LED_RH, HIGH);
-
     // Write T/Rh Data into Diplay-Array
     if (!bReadRH)
     {
@@ -278,13 +271,12 @@ void GetTime()
   {
     Serial.println("SPIFFS mounted");
   }
+  //If WiFi fails make it switch to the next entry in WiFi.txt until no further entry
   File file = SPIFFS.open("/wifi.txt");
   StrSSID = file.readStringUntil('\n');
   StrPWD = file.readStringUntil('\n');
-  Serial.printf("FromSPIFFS: %s, %s \n", StrSSID.c_str(), StrPWD.c_str());
-  file.close();
-  SPIFFS.end();
-
+  //Serial.printf("FromSPIFFS: %s, %s \n", StrSSID.c_str(), StrPWD.c_str());
+  
   WiFi.begin(StrSSID.c_str(), StrPWD.c_str());
   Serial.print("Connecting to WiFi..");
   while (WiFi.status() != WL_CONNECTED)
@@ -295,7 +287,7 @@ void GetTime()
   Serial.println("");
 
   Serial.println("WiFi connected.");
-
+  
   // GetTime from Server
   configTime(gmtOffs_Sec, DayLightSavingTime_Sec, ntp);
   printLocalTime();
@@ -304,6 +296,8 @@ void GetTime()
   WiFi.disconnect(true);
   WiFi.mode(WIFI_OFF);
   Serial.println("WiFi disconnected.");
+  file.close();
+  SPIFFS.end();
 }
 /************************************
  * Setup Begin
@@ -314,15 +308,8 @@ void setup()
   int i;
   Serial.begin(115200);
   // Starte DHT zugriff
-  // dht.begin();
   dht.setup(DHTPIN, DHTesp::AUTO_DETECT);
   dhtData = dht.getTempAndHumidity();
-
-  SerialBT.begin("Clock7Digit");
-  if (SerialBT.available())
-  {
-    Serial.println("BT Available");
-  }
 
   // Die Segmente werden positiv angesteuert,
   //  aber mit PWM Steuerung
@@ -338,7 +325,6 @@ void setup()
   // Setup ports
   pinMode(LED_CTL, OUTPUT);
   pinMode(LED_SEC, OUTPUT);
-  pinMode(LED_RH, OUTPUT);
   //  pinMode (DHTPIN, INPUT);
   pinMode(LED_7_A, OUTPUT);
   pinMode(LED_7_B, OUTPUT);
@@ -348,12 +334,11 @@ void setup()
   pinMode(LED_7_F, OUTPUT);
   pinMode(LED_7_G, OUTPUT);
 
- 
   DisplayTest();
 
   // Konfiguriere die Uhrzeit
   GetTime();
- 
+
   // Setze Sekunden ticker
   ulTime = millis();
   ulLstTime = millis();
@@ -363,8 +348,8 @@ void setup()
   timer = timerBegin(0, 80, true);            // Prescaler 80000000 / 80 = 1000000 ticks / sekunde
   timerAttachInterrupt(timer, &onTime, true); // Timer an Interrupt anhängen
   timerAlarmWrite(timer, 1000000, true);      // Alarm jede Sekunde
-  
-  //Allow Time Reading first by setting bReadTM and bReadRH
+
+  // Allow Time Reading first by setting bReadTM and bReadRH
   bReadTM = true;
   bReadRH = false;
   Serial.println("Setup fertig...");
@@ -396,7 +381,7 @@ void loop()
     bFirstLoop = true;
     Serial.println("Erster Eintritt in Loop()");
   }
- 
+
   TouchControl();
 
   UpdateDisplay();
@@ -416,21 +401,7 @@ void loop()
    * (Wie in der alten 8Bit microController-Welt der 90iger Jahre) nicht mehr so einfach möglich.
    * (Quelle: https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf)
    */
-  /*
-  //This was the original INLOOP RH reading process whoch caused the display to freeze
-   if (bShowRH){ no bShowRH is bReadRH
-     // DT11 T/RH daten holen
-     // Reading temperature or humidity takes about 22 milliseconds!
-     ulStart = micros();
-     dhtData = dht.getTempAndHumidity();
-     iHrTmp = int(dhtData.temperature);
-     iMinRH = int(dhtData.humidity);
-     ulStop = micros() - ulStart;
 
-     Serial.print(ulStop);
-     Serial.println(" µs");
-     bShowRH = false;
-   }  else {*/
   delay(5);
 
 } // End LOOP
@@ -438,169 +409,157 @@ void loop()
 void UpdateDisplay()
 {
   int i;
-  // Erst mal letzte aktive Anzeige ausschalten / löschen, jetzt sind alle Anzeigen aus
-  ledcWrite(iChClk, 0); // Setz die Pulsweite für Digit i auf 0, das Digit i ist wieder aus.
+  int iSeg;
+  int iNum;
+  bool bOut;
 
-  /*iChClk behandeln: wenn >=3 oder <0 dann iChClk=0 (>=3 zur Sicherheit) sonst iChClk++
-  switch(iChClk){
-    case 0 ... 2:
-      iChClk++; // iChClk kann bis 3 hochzählen
-    break;
-    default:
-      iChClk=0; //Wenn > 2 im nächsten Durchlauf (=3) dann wird es zurückgesetzt auf 0
-   } End switch iChCLk */
-  if (iChClk < 3)
-  {
-    iChClk++;
-  }
-  else
-  {
-    iChClk = 0;
-  }
+  // Letzte aktive Anzeige ausschalten / löschen, jetzt sind alle Anzeigen aus
+  ledcWrite(iChClk, 0); // Setz die Pulsweite für Digit i auf 0, das Digit i ist aus.
 
-  // Wert der aktuellen Stelle in der Uhrzeit passend gemäß iChClk abrufen
+  iChClk++;
+  if(iChClk>3){iChClk=0;}
+  iNum = uiClk[iChClk]; // Wert der aktuellen Stelle im DisplayBuffer gemäß iChClk abrufen
 
   // die 7 Segment Ports 0 - 6 gemäß aktuellem Wert setzen
-  for (i = 0; i < 7; ++i)
+  for (i = 0; i <= 6; i++)
   {
-    digitalWrite(iarSegs[i], iarNum2Segs[uiClk[iChClk]][i]);
+    iSeg = iarSegs[i];
+    /* Diese Funktion führt zu einem sporadischen CORE1 Panic
+    digitalWrite(iarSegs[i], (iarNum2Segs[uiClk[iChClk]][i] == 1));
+    */
+    bOut = (iarNum2Segs[iNum][i] == 1);
+    digitalWrite(iSeg, bOut);
+    ledcWrite(iChClk, uiLum); // Brightness is set to value of uiLUM
   }
-
-  // Das Digit einschalten bzw auf den Leuchtwert gemäß Dimmer setzen
-  //  ledcWrite(iChClk,lesenADC()); // Helligkeit wird entsprechend des analogen Spannnungswertes am ADC0 Eingang gesetzt
-  ledcWrite(iChClk, uiLum); // Brightness is set to value of uiLUM
-}
+} // End UpdateDisplay
 
 void DisplayTest()
-{
-  int i;
-  // Start testlauf
-  Serial.println("Testlauf");
-
-  // Kontroll-LED, die blaue LED dient während der Entwicklung
-  // der Visualisierung des Testlaufs.
-
-  // Kontroll-LED 10 mal blinken
-  for (i = 0; i < 9; ++i)
   {
-    digitalWrite(LED_CTL, HIGH);
-    delay(200);
-    digitalWrite(LED_CTL, LOW);
-    delay(200);
-  }
+    int i;
+    // Start testlauf
+    Serial.println("Testlauf");
 
-  // Alle 7 Segmente aus
-  for (i = 0; i < 7; ++i)
-  {
-    digitalWrite(iarSegs[i], LOW);
-  }
+    // Kontroll-LED, die blaue LED dient während der Entwicklung
+    // der Visualisierung des Testlaufs.
 
-  // Alle 7Segment-Digits über Common Cath aus.
-  for (i = 0; i <= 3; ++i)
-  {
-    ledcWrite(i, 0); // Setz die Pulsweite für jeden Kanal auf 0, die Digits sind aus
-  }
-
-  // Jetzt alle 7 Segmente eines Digits EIN, Common Cath. ist noch aus
-  for (i = 0; i < 7; ++i)
-  {
-    digitalWrite(iarSegs[i], HIGH); //
-  }
-
-  // Testlauf: jedes Digit einmal ein mit allen Segmenten angesteuert
-  for (i = 0; i <= 3; ++i)
-  {
-    digitalWrite(LED_CTL, HIGH); // Kontroll-LED an
-    ledcWrite(i, 1000);          // Setz die Pulsweite für Kanal/Digit i auf ca maximum, jeweils ein Digit i ist an
-    delay(200);                  // Warte 300ms
-    ledcWrite(i, 0);             // Setz die Pulsweite für Kanal/Digit i auf 0, das Digit i ist wieder aus.
-    digitalWrite(LED_CTL, LOW);  // Kontroll-LED aus
-    delay(200);                  // Warte 300 ms
-  }
-}
-
-void TouchControl(){
-   // Touch sensor lesen, auswerten und ggf Sommerzeit setzen
-  ulTime = millis();
-  if ((ulTime - ulLstTime) > 100)
-  { // alle 100 ms den TouchSensor abfragen
-    ulLstTime = ulTime;
-    /*
-    if ((uiTouch - touchRead(14)) > 50){ //Mit Pad Max 73 und Min ~10 Counts
-    //Werten wenn Count < 15 ist anstatt die Differenz zu nutzen??
-     GetTime();
-    }
-    */
-    if (SerialBT.connected())
+    // Kontroll-LED 10 mal blinken
+    for (i = 0; i < 9; ++i)
     {
-      SerialBT.printf("TouchPin Saving Daylight reads %i\n", touchRead(TPIN14));
+      digitalWrite(LED_CTL, HIGH);
+      delay(200);
+      digitalWrite(LED_CTL, LOW);
+      delay(200);
     }
-    // if (touchRead(TPIN14) < 35)
-    if (touchRead(TOUCH14) < 35)
+
+    // Alle 7 Segmente aus
+    for (i = 0; i < 7; ++i)
     {
-      // Alle100ms wird uiTouch14 + 1 gezählt
-      // nach 3 Durchläufen (TouchRead(TPIN) < 35) = 300ms wird die Routine aktiv
-      uiTouch14++;
-      if (uiTouch14 > 3)
+      digitalWrite(iarSegs[i], LOW);
+    }
+
+    // Alle 7Segment-Digits über Common Cath aus.
+    for (i = 0; i <= 3; ++i)
+    {
+      ledcWrite(i, 0); // Setz die Pulsweite für jeden Kanal auf 0, die Digits sind aus
+    }
+
+    // Jetzt alle 7 Segmente eines Digits EIN, Common Cath. ist noch aus
+    for (i = 0; i < 7; ++i)
+    {
+      digitalWrite(iarSegs[i], HIGH); //
+    }
+
+    // Testlauf: jedes Digit einmal ein mit allen Segmenten angesteuert
+    for (i = 0; i <= 3; ++i)
+    {
+      digitalWrite(LED_CTL, HIGH); // Kontroll-LED an
+      ledcWrite(i, 1000);          // Setz die Pulsweite für Kanal/Digit i auf ca maximum, jeweils ein Digit i ist an
+      delay(200);                  // Warte 300ms
+      ledcWrite(i, 0);             // Setz die Pulsweite für Kanal/Digit i auf 0, das Digit i ist wieder aus.
+      digitalWrite(LED_CTL, LOW);  // Kontroll-LED aus
+      delay(200);                  // Warte 300 ms
+    }
+  } // End DisplayTest
+
+  void TouchControl()
+  {
+    // Touch sensor lesen, auswerten und ggf Sommerzeit setzen
+    ulTime = millis();
+    if ((ulTime - ulLstTime) > 100)
+    { // alle 100 ms den TouchSensor abfragen
+      ulLstTime = ulTime;
+      /*
+      if ((uiTouch - touchRead(14)) > 50){ //Mit Pad Max 73 und Min ~10 Counts
+      //Werten wenn Count < 15 ist anstatt die Differenz zu nutzen??
+       GetTime();
+      }
+      */
+      // if (touchRead(TPIN14) < 35)
+      if (touchRead(TOUCH14) < 35)
       {
+        // Alle100ms wird uiTouch14 + 1 gezählt
+        // nach 3 Durchläufen (TouchRead(TPIN) < 35) = 300ms wird die Routine aktiv
+        uiTouch14++;
+        if (uiTouch14 > 3)
+        {
+          uiTouch14 = 0;
+          if (DayLightSavingTime_Sec == 0)
+          {
+            DayLightSavingTime_Sec = 3600;
+          }
+          else
+          {
+            DayLightSavingTime_Sec = 0;
+          }
+          GetTime();
+          Serial.printf("Touch Value %i\n", uiTouch14);
+          Serial.printf("Sommerzeit : %i\n", DayLightSavingTime_Sec);
+        }
+      }
+      else
+      {
+        // TouchRead(TPIN) > 35 setzt uiTouch14 immer auf null
         uiTouch14 = 0;
-        if (DayLightSavingTime_Sec == 0)
-        {
-          DayLightSavingTime_Sec = 3600;
-        }
-        else
-        {
-          DayLightSavingTime_Sec = 0;
-        }
-        GetTime();
-        Serial.printf("Touch Value %i\n", uiTouch14);
-        Serial.printf("Sommerzeit : %i\n", DayLightSavingTime_Sec);
       }
-    }
-    else
-    {
-      // TouchRead(TPIN) > 35 setzt uiTouch14 immer auf null
-      uiTouch14 = 0;
-    }
 
-    // uiTouch33 : Helligkeit
-    // if (touchRead(TPIN33) < 35)
-    if (touchRead(TOUCH33) < 35)
-    {
-      // Alle100ms wird uiTouch33 + 1 gezählt
-      // nach 5 Durchläufen (TouchRead(TPIN) < 35) = 500ms wird die Routine aktiv
-      uiTouch33++;
-      if (uiTouch33 > 3)
+      // uiTouch33 : Helligkeit
+      // if (touchRead(TPIN33) < 35)
+      if (touchRead(TOUCH33) < 35)
       {
-        uiTouch33 = 0;
+        // Alle100ms wird uiTouch33 + 1 gezählt
+        // nach 5 Durchläufen (TouchRead(TPIN) < 35) = 500ms wird die Routine aktiv
+        uiTouch33++;
+        if (uiTouch33 > 3)
+        {
+          uiTouch33 = 0;
 
-        if (bLumDir)
-        {
-          uiLum = uiLum + 100;
-          if (uiLum > 2000)
+          if (bLumDir)
           {
-            uiLum = 2000;    // Maximale Leuchtstärke
-            bLumDir = false; // Zählrichtung abwärts
+            uiLum = uiLum + 100;
+            if (uiLum > 2000)
+            {
+              uiLum = 2000;    // Maximale Leuchtstärke
+              bLumDir = false; // Zählrichtung abwärts
+            }
           }
-        }
-        else
-        {
-          uiLum = uiLum - 100;
-          if (uiLum < 200)
+          else
           {
-            uiLum = 200;    // Minimale Leuchtstärke
-            bLumDir = true; // Zählrichtung abwärts
+            uiLum = uiLum - 100;
+            if (uiLum < 200)
+            {
+              uiLum = 200;    // Minimale Leuchtstärke
+              bLumDir = true; // Zählrichtung abwärts
+            }
           }
+          Serial.printf("Touch Value LUM %i\n", uiTouch33);
+          Serial.printf("Luminescence : %i\n", uiLum);
+          digitalWrite(LED_CTL, LOW);
         }
-        Serial.printf("Touch Value LUM %i\n", uiTouch33);
-        Serial.printf("Luminescence : %i\n", uiLum);
-        digitalWrite(LED_CTL, LOW);
+      }
+      else
+      {
+        // TouchRead(TPIN33) >35 setzt uiTouch33 immer auf null
+        uiTouch33 = 0;
       }
     }
-    else
-    {
-      // TouchRead(TPIN33) >35 setzt uiTouch33 immer auf null
-      uiTouch33 = 0;
-    }
-  }
-}
+  } //End TouchControl
