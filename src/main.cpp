@@ -4,27 +4,52 @@
 #include "DHTesp.h"
 #include <SPIFFS.h>
 //#include "rtc.h"
+
+#define BCD
+
 void UpdateDisplay();
 void DisplayTest();
 void TouchControl();
+/* PINOUT DEV KIT V1
 
+              ---[USB]---
+          3V3 o         o VIN
+          GND o         o GND
+         IO15 o         o IO13
+         IO02 o         o IO12
+         IO04 o         o IO14
+         IO16 o         o IO27
+         IO17 o         o IO26
+         IO05 o         o IO25
+         IO18 o         o IO33
+         IO19 o         o IO32
+         IO21 o         o IO35
+         IO03 o         o IO34
+         IO01 o         o IO39
+         IO22 o         o IO36
+         IO23 o         o EN
+
+
+*/
 /* Pinout WEMOS D1 mini
                ---------- [USB] ---------------- 
-        [IO06] xx IO00 (SD0)           (SD3)  IO10 xx IO11 (CMD)
-        [IO08] x? IO15 (TD0) RTC? (TCK) RTC?  IO13 ?x IO09 (SD2)
-  LEDTCK  IO02 0o VCC                          3V3 ox NC 
-  RTC?    IO00 ?o GND                 LEDSEC  IO05 00 IO14 TOUCH6(TMS)
-  DHT     IO04 00 IO16 LED_7C         LED_M1  IO23 0x IO34 (IN)
-  RTC     IO12 00 IO17 LED_7D         LED_M10 IO19 00 IO33 TOUCH8 
-  LED_7E  IO32 00 IO21 LED_7G         LED_H1  IO18 0x IO35 (IN)
-  LED_7F  IO25 00 IO22 LED_7A         LED_H10 IO26 0x IO39 (IN) (SVN)
-  LED_7B  IO27 0o IO03 (RXD)        (SVP)(IN) IO36 xx NC
-           GND oo IO01 (TX)                    RST xo GND
- Use LED_RH also as LEDSEC free IO05 or IO12
- RTC 3 Wire POSSIBLE GPIO Also IO05 or IO12
- CLK OUT    IO00    
- DAT I/O    IO13
- RST OUT    IO15
+        [IO06] xx IO07 (SD0)               (SD3)  IO10 xx IO11 (CMD)
+        [IO08] xx IO15 (TD0)               (TCK)  IO13 xx IO09 (SD2)
+  LEDTCK  IO02 0o VCC                             3V3  ox NC 
+  RTCCLK  IO00 0o GND                     LEDSEC  IO05 00 IO14 TOUCH6(TMS)
+  DHT     IO04 00 IO16 LED_7C             LED_M1  IO23 0x IO34 (IN)
+  RTCRST  IO12 00 IO17 LED_7D             LED_M10 IO19 00 IO33 TOUCH8 
+  LED_7E  IO32 00 IO21 LED_7G             LED_H1  IO18 0x IO35 (IN)
+  LED_7F  IO25 00 IO22 LED_7A             LED_H10 IO26 0x IO39 (IN) (SVN)
+  LED_7B  IO27 0o IO03 (RXD)            (SVP)(IN) IO36 xx NC
+           GND oo IO01 (TX)                        RST xo GND
+ Use LED_RH also as LEDSEC free io05 or IO12
+ RTC 3 Wire POSSIBLE GPIO Also or io05  IO12
+
+            D1      DEV KITV1 
+ CLK OUT    IO00    IO12   
+ DAT I/O    IO13    IO13
+ RST OUT    IO12    IO05
 */
 // WLAN Struktur
 const char *ntp = "ptbtime1.ptb.de";
@@ -46,16 +71,22 @@ String StrPWD = "";
 #define LED_M10 19 // Aktivierung des 7Segment-Blocks Minuten 10er
 #define LED_M1 23  // Aktivierung des 7Segment-Blocks Minuten 1er
 
-// a=22, b=27, c=16, d=17, e=32, f=25, g=21 : Ports jedes Segments per Fritzing
-#define LED_7_A 22 // Pad zu Seg A  ebenso I2C0:SCL, Ersatzweise IO35 (Also unused ADC1)
-#define LED_7_B 27 // Pad zu Seg B
-#define LED_7_C 16 // Pad zu Seg C
-#define LED_7_D 17 // Pad zu Seg D
-#define LED_7_E 32 // Pad zu Seg E
-#define LED_7_F 25 // Pad zu Seg F
-#define LED_7_G 21 // Pad zu Seg G ebenso I2C0:SDA, Esatzweise IO39 (Also unused ADC3)
-
-
+#ifndef BCD
+  // a=22, b=27, c=16, d=17, e=32, f=25, g=21 : Ports jedes Segments per Fritzing
+  #define LED_7_A 22 // Pad zu Seg A  ebenso I2C0:SCL, Ersatzweise IO35 (Also unused ADC1)
+  #define LED_7_B 27 // Pad zu Seg B
+  #define LED_7_C 16 // Pad zu Seg C
+  #define LED_7_D 17 // Pad zu Seg D
+  #define LED_7_E 32 // Pad zu Seg E
+  #define LED_7_F 25 // Pad zu Seg F
+  #define LED_7_G 21 // Pad zu Seg G ebenso I2C0:SDA, Esatzweise IO39 (Also unused ADC3)
+#else
+  //BCD0=27,BCD1=12, BCD2=32, BCD3=25
+  #define LED_BCD0 27
+  #define LED_BCD1 12
+  #define LED_BCD2 32
+  #define LED_BCD3 25
+#endif
 /* PWM Kanal, Dimmer Struktur, jeder PWM Kanal steuert ein Segment,
 which is later connected to a GPIO*/
 #define LEDC_CH_0 0 // PWM Kanal 0, 0 von 15 : Port H10
@@ -109,8 +140,10 @@ unsigned int uiLum = 600; // Speicher für aktuelle Helligkeit
 bool bLumDir = true;      // Wirkrichtung abwärts FALSE oder aufwärts TRUE
 bool bFirstLoop = false;
 
+#ifndef BCD
 // Definition der Segment-Ports für Test-Durchlauf
 int iarSegs[7] = {LED_7_A, LED_7_B, LED_7_C, LED_7_D, LED_7_E, LED_7_F, LED_7_G};
+
 
 /*Definition der aktiven Segmente abhängig von dem numerischen Wert einer Stelle
  * Wie verpackt Mensch sinnvoll die Info Port & ON/OFF, so dass mit möglichst wenigen
@@ -119,6 +152,8 @@ int iarSegs[7] = {LED_7_A, LED_7_B, LED_7_C, LED_7_D, LED_7_E, LED_7_F, LED_7_G}
  * Das geht, ist aber programtechnisch aufwendiger, muss ich erst mal lernen
  */
 int iarNum2Segs[10][7] = {{1, 1, 1, 1, 1, 1, 0}, {0, 1, 1, 0, 0, 0, 0}, {1, 1, 0, 1, 1, 0, 1}, {1, 1, 1, 1, 0, 0, 1}, {0, 1, 1, 0, 0, 1, 1}, {1, 0, 1, 1, 0, 1, 1}, {1, 0, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 0, 1, 1}};
+#endif
+
 int iChClk = 0;               // Counter für die Position der Stelle/Digit
 uint uiClk[4] = {2, 4, 5, 9}; // Speicher f.d. 4 Digits
 // speicher für T/Rh
@@ -326,13 +361,20 @@ void setup()
   pinMode(LED_CTL, OUTPUT);
   pinMode(LED_SEC, OUTPUT);
   //  pinMode (DHTPIN, INPUT);
-  pinMode(LED_7_A, OUTPUT);
-  pinMode(LED_7_B, OUTPUT);
-  pinMode(LED_7_C, OUTPUT);
-  pinMode(LED_7_D, OUTPUT);
-  pinMode(LED_7_E, OUTPUT);
-  pinMode(LED_7_F, OUTPUT);
-  pinMode(LED_7_G, OUTPUT);
+  #ifndef BCD
+    pinMode(LED_7_A, OUTPUT);
+    pinMode(LED_7_B, OUTPUT);
+    pinMode(LED_7_C, OUTPUT);
+    pinMode(LED_7_D, OUTPUT);
+    pinMode(LED_7_E, OUTPUT);
+    pinMode(LED_7_F, OUTPUT);
+    pinMode(LED_7_G, OUTPUT);
+  #else
+    pinMode(LED_BCD0, OUTPUT);
+    pinMode(LED_BCD1, OUTPUT);
+    pinMode(LED_BCD2, OUTPUT);
+    pinMode(LED_BCD3, OUTPUT);
+  #endif
 
   DisplayTest();
 
@@ -412,6 +454,7 @@ void UpdateDisplay()
   int iSeg;
   int iNum;
   bool bOut;
+  char strBCD[0]; 
 
   // Letzte aktive Anzeige ausschalten / löschen, jetzt sind alle Anzeigen aus
   ledcWrite(iChClk, 0); // Setz die Pulsweite für Digit i auf 0, das Digit i ist aus.
@@ -419,18 +462,30 @@ void UpdateDisplay()
   iChClk++;
   if(iChClk>3){iChClk=0;}
   iNum = uiClk[iChClk]; // Wert der aktuellen Stelle im DisplayBuffer gemäß iChClk abrufen
+ 
 
-  // die 7 Segment Ports 0 - 6 gemäß aktuellem Wert setzen
-  for (i = 0; i <= 6; i++)
-  {
-    iSeg = iarSegs[i];
-    /* Diese Funktion führt zu einem sporadischen CORE1 Panic
-    digitalWrite(iarSegs[i], (iarNum2Segs[uiClk[iChClk]][i] == 1));
-    */
-    bOut = (iarNum2Segs[iNum][i] == 1);
-    digitalWrite(iSeg, bOut);
+  #ifdef BCD
+    digitalWrite(LED_BCD0, (iNum & 1)==1);
+    digitalWrite(LED_BCD1, (iNum & 2)==2);
+    digitalWrite(LED_BCD2, (iNum & 4)==4);
+    digitalWrite(LED_BCD3, (iNum & 8)==8);
     ledcWrite(iChClk, uiLum); // Brightness is set to value of uiLUM
-  }
+  #else
+    //********* Teste DEC2BCD
+    Serial.printf("iNum %i, 0b%i%i%i%i \n", iNum, (iNum & 8) == 8,(iNum & 4) == 4, (iNum & 2) == 2, (iNum & 1) == 1 );
+    //******* Ende Test
+    // die 7 Segment Ports 0 - 6 gemäß aktuellem Wert setzen
+    for (i = 0; i <= 6; i++)
+    {
+      iSeg = iarSegs[i];
+      /* Diese Funktion führt zu einem sporadischen CORE1 Panic
+      digitalWrite(iarSegs[i], (iarNum2Segs[uiClk[iChClk]][i] == 1));
+      */
+      bOut = (iarNum2Segs[iNum][i] == 1);
+      digitalWrite(iSeg, bOut);
+      ledcWrite(iChClk, uiLum); // Brightness is set to value of uiLUM
+    }
+  #endif
 } // End UpdateDisplay
 
 void DisplayTest()
@@ -451,24 +506,32 @@ void DisplayTest()
       delay(200);
     }
 
-    // Alle 7 Segmente aus
+    /* Alle 7 Segmente aus
     for (i = 0; i < 7; ++i)
     {
       digitalWrite(iarSegs[i], LOW);
     }
-
+    rausgenommen weil unnötig*/
     // Alle 7Segment-Digits über Common Cath aus.
     for (i = 0; i <= 3; ++i)
     {
       ledcWrite(i, 0); // Setz die Pulsweite für jeden Kanal auf 0, die Digits sind aus
     }
-
+    #ifndef BCD
     // Jetzt alle 7 Segmente eines Digits EIN, Common Cath. ist noch aus
     for (i = 0; i < 7; ++i)
     {
       digitalWrite(iarSegs[i], HIGH); //
     }
-
+    #else
+    //alternativ könnte ein Ausgangg /LT ansteuern, 
+    // das würde einen gesparten Ausgang wieder belegen
+    // so schreibt das System einfach eine 8
+      digitalWrite(LED_BCD0, LOW);
+      digitalWrite(LED_BCD1, LOW);
+      digitalWrite(LED_BCD2, LOW);
+      digitalWrite(LED_BCD3, HIGH);
+    #endif
     // Testlauf: jedes Digit einmal ein mit allen Segmenten angesteuert
     for (i = 0; i <= 3; ++i)
     {
